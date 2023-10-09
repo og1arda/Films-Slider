@@ -1,7 +1,14 @@
 body {
   text-align: center;
+  background-color: beige;
 }
 
 .fa-solid {
   padding: 10px;
+}
+
+.card {
+  margin: auto;
+  position: relative;
+  margin-top: 50px;
 }

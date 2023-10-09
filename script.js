@@ -42,6 +42,11 @@ let index = 0;
 let slayCount = films.length;
 let interval;
 
+let settings = {
+  random: true,
+  duration: '1000',
+};
+
 function showSlide(index) {
   document
     .querySelector('.card-img-top')
@@ -70,4 +75,33 @@ document.querySelector('.fa-forward').addEventListener('click', function () {
     index = 0;
   }
   showSlide(index);
+});
+
+function init(settings) {
+  let prev;
+  interval = setInterval(function () {
+    if (settings.random) {
+      do {
+        index = Math.trunc(Math.random() * slayCount);
+      } while (index == prev);
+      prev = index;
+    } else {
+      if (index + 1 > slayCount) {
+        index = 0;
+      }
+    }
+    showSlide(index);
+    index++;
+  }, settings.duration);
+}
+
+document.querySelectorAll('.fa-solid').forEach(function (item) {
+  item.addEventListener('mouseleave', function () {
+    init(settings);
+  });
+});
+document.querySelectorAll('.fa-solid').forEach(function (item) {
+  item.addEventListener('mouseenter', function () {
+    clearInterval(interval);
+  });
 });
